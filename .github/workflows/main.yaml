@@ -11,8 +11,6 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v2
-        with:
-          token: ${{ secrets.WORKFLOW_TEST }}
 
       - name: Setup ROS 2 environment
         uses: ros-tooling/setup-ros@0.7.0
@@ -32,17 +30,6 @@ jobs:
               }
             }
           colcon-mixin-repository: https://raw.githubusercontent.com/colcon/colcon-mixin-repository/1ddb69bedfd1f04c2f000e95452f7c24a4d6176b/index.yaml
-
-      - name: Upload coverage reports to Codecov
-        uses: codecov/codecov-action@v3
-        env:
-          CODECOV_TOKEN: ${{ secrets.WORKFLOW_TEST }}
-
-      - name: Date Action CI
-        uses: Juancams/date-last-ci@main
-        with:
-          gist_id: 1954850ee87f244a87d72d2636d6bfff
-          gist_token: ${{ secrets.GIST_TOKEN }}
 
   release-docker:
     name: Build and Push Docker Image
